@@ -10,8 +10,13 @@ return (<h3>I am another component {params.name}</h3>)
 class App extends Component {
   name = "john";
 
+  constructor() {
+    super();
+    this.backToHello = this.backToHello.bind(this);
+  }
   state = {
-    logged: false
+    logged: false,
+    backToHello: false
   }
 
   loginHandler = () => {
@@ -20,6 +25,12 @@ class App extends Component {
     })
     console.log('Clicked the button');
     console.log(this.state.logged);
+  }
+
+  //simple window location redirect.
+  backToHello ()  {
+      //this.props.history.push('/hello');
+      window.location.href="/hello";
   }
 
   handleTimer() {
@@ -40,6 +51,7 @@ class App extends Component {
           <li><Link to="/user/logger">User</Link></li>
         </ul>
         <button onClick={this.loginHandler}>Login</button>
+        <button onClick={this.backToHello}>Redirect to Hello</button>
         <div>
         {/* this is the default home url */}
         <Route path="/" exact render = {
